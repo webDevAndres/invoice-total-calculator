@@ -5,25 +5,60 @@ var $ = function (id) {
 
 var calculateDiscountPercent = function (customerType, invoiceSubtotal) {
     var discountPercent = 0;
-    if (customerType === "r") {
-        if (invoiceSubtotal < 100) {
-            discountPercent = .0;
-        } else if (invoiceSubtotal >= 100 && invoiceSubtotal < 250) {
-            discountPercent = .1;
-        } else if (invoiceSubtotal >= 250 && invoiceSubtotal < 500) {
+    switch (customerType) {
+        case "r":
+            if (invoiceSubtotal < 100) {
+                discountPercent = .1;
+            } else if (invoiceSubtotal >= 100 && invoiceSubtotal < 250) {
+                discountPercent = .2;
+            } else if (invoiceSubtotal >= 250 && invoiceSubtotal < 500) {
+                discountPercent = .25;
+            } else if (invoiceSubtotal >= 500 && invoiceSubtotal < 1000) {
+                discountPercent = .3;
+            } else {
+                discountPercent = .4;
+            }
+            break;
+        case "l":
             discountPercent = .25;
-        } else if (invoiceSubtotal >= 500) {
-            discountPercent = .3;
-        }
-    } else if (customerType === "l") {
-        discountPercent = .3;
-    } else if (customerType === "h") {
-        if (invoiceSubtotal < 500) {
-            discountPercent = .4;
-        } else if (invoiceSubtotal >= 500) {
+            break;
+        case "h":
+            if (invoiceSubtotal < 500) {
+                discountPercent = .4;
+            } else if (invoiceSubtotal >= 500) {
+                discountPercent = .5;
+            }
+            break;
+        case "e":
             discountPercent = .5;
-        }
+            break;
+
+        default:
+            discountPercent = 0;
     }
+    // if (customerType === "r") {
+    //     if (invoiceSubtotal < 100) {
+    //         discountPercent = .1;
+    //     } else if (invoiceSubtotal >= 100 && invoiceSubtotal < 250) {
+    //         discountPercent = .2;
+    //     } else if (invoiceSubtotal >= 250 && invoiceSubtotal < 500) {
+    //         discountPercent = .25;
+    //     } else if (invoiceSubtotal >= 500 && invoiceSubtotal < 1000 ) {
+    //         discountPercent = .3;
+    //     } else if (invoiceSubtotal >= 1000) {
+    //         discountPercent = .4;
+    //     }
+    // } else if (customerType === "l") {
+    //     discountPercent = .3;
+    // } else if (customerType === "h") {
+    //     if (invoiceSubtotal < 500) {
+    //         discountPercent = .4;
+    //     } else if (invoiceSubtotal >= 500) {
+    //         discountPercent = .5;
+    //     }
+    // } else if (customerType === "e") {
+    //     discountPercent = .5;
+    // }
     return discountPercent;
 };
 var processEntries = function () {
@@ -47,7 +82,7 @@ var processEntries = function () {
 
     $("type").focus();
 };
-window.onload = function() {
+window.onload = function () {
     $("calculate").onclick = processEntries;
     $("type").focus();
 };
