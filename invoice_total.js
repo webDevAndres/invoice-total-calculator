@@ -36,29 +36,6 @@ var calculateDiscountPercent = function (customerType, invoiceSubtotal) {
         default:
             discountPercent = 0;
     }
-    // if (customerType === "r") {
-    //     if (invoiceSubtotal < 100) {
-    //         discountPercent = .1;
-    //     } else if (invoiceSubtotal >= 100 && invoiceSubtotal < 250) {
-    //         discountPercent = .2;
-    //     } else if (invoiceSubtotal >= 250 && invoiceSubtotal < 500) {
-    //         discountPercent = .25;
-    //     } else if (invoiceSubtotal >= 500 && invoiceSubtotal < 1000 ) {
-    //         discountPercent = .3;
-    //     } else if (invoiceSubtotal >= 1000) {
-    //         discountPercent = .4;
-    //     }
-    // } else if (customerType === "l") {
-    //     discountPercent = .3;
-    // } else if (customerType === "h") {
-    //     if (invoiceSubtotal < 500) {
-    //         discountPercent = .4;
-    //     } else if (invoiceSubtotal >= 500) {
-    //         discountPercent = .5;
-    //     }
-    // } else if (customerType === "e") {
-    //     discountPercent = .5;
-    // }
     return discountPercent;
 };
 var processEntries = function () {
@@ -79,8 +56,7 @@ var processEntries = function () {
     $("percent").value = (discountPercent * 100).toFixed(2);
     $("discount").value = discountAmount.toFixed(2);
     $("total").value = invoiceTotal.toFixed(2);
-
-    $("type").focus();
+    $("subtotal").focus();
 };
 window.onload = function () {
     $("calculate").onclick = processEntries;
